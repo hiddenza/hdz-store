@@ -1,0 +1,6 @@
+{
+  "name": "HDZ-STORE",
+  "description": "High-ticket premium electronics and cutting-edge tech. Curated global innovation, delivered globally.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
