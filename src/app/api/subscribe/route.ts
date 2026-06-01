@@ -1,3 +1,4 @@
+import { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } from '@/lib/env_override';
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { getResend } from '@/lib/resend';
@@ -9,8 +10,8 @@ let supabaseAdminInstance: any = null;
 
 function getSupabaseAdmin() {
   if (!supabaseAdminInstance) {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const url = SUPABASE_URL;
+    const key = SUPABASE_SERVICE_ROLE_KEY;
     
     if (!url || !key) {
       console.warn('Supabase URL or Service Role Key is missing. Database operations will be skipped.');

@@ -25,7 +25,9 @@ export default function Navbar() {
     
     const auth = supabase?.auth;
     if (auth) {
-      auth.getUser().then(({ data: { user: u } }) => setUser(u));
+      auth.getUser().then(({ data: { user: u } }) => setUser(u)).catch((err) => {
+        console.warn('Navbar: Failed to retrieve user session on load.', err);
+      });
       
       const { data: { subscription } } = auth.onAuthStateChange((_event, session) => {
         setUser(session?.user ?? null);

@@ -1,3 +1,4 @@
+import { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } from '@/lib/env_override';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
@@ -16,8 +17,8 @@ function getStripe() {
 
 function getSupabaseAdmin() {
   if (!supabaseAdminInstance) {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const url = SUPABASE_URL;
+    const key = SUPABASE_SERVICE_ROLE_KEY;
     if (!url || !key) throw new Error('Supabase admin credentials missing');
     supabaseAdminInstance = createClient(url, key);
   }

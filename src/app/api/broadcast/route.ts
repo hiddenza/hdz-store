@@ -1,3 +1,4 @@
+import { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } from '@/lib/env_override';
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { getResend } from '@/lib/resend';
@@ -7,8 +8,8 @@ let supabaseAdminInstance: any = null;
 
 function getSupabaseAdmin() {
   if (!supabaseAdminInstance) {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const url = SUPABASE_URL;
+    const key = SUPABASE_SERVICE_ROLE_KEY;
     if (!url || !key) return null;
     supabaseAdminInstance = createClient(url, key);
   }
@@ -19,7 +20,7 @@ export async function POST(req: NextRequest) {
   try {
     const { subject, message, secret } = await req.json();
 
-    const roleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const roleKey = SUPABASE_SERVICE_ROLE_KEY;
     if (secret !== roleKey?.slice(0, 10)) {
        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

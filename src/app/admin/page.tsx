@@ -184,6 +184,10 @@ export default function AdminPage() {
       } else {
         fetchRealData();
       }
+    }).catch((err) => {
+      console.warn('Admin check: Failed to retrieve user session.', err);
+      toast.error('Could not authenticate. Please double-check network connection or reload.');
+      router.push('/auth');
     });
 
     if (activeTab === 'dropshipping') {
@@ -297,7 +301,7 @@ export default function AdminPage() {
                        <CardDescription>Daily revenue performance across all international markets.</CardDescription>
                     </CardHeader>
                     <CardContent className="h-[400px] p-8 pt-4 overflow-hidden">
-                       <ResponsiveContainer width="100%" height="100%">
+                       <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={300}>
                           <AreaChart data={chartData}>
                              <defs>
                                 <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">

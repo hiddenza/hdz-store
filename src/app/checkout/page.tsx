@@ -15,7 +15,9 @@ export default function CheckoutPage() {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => setUser(user));
+    supabase?.auth.getUser().then(({ data: { user } }) => setUser(user)).catch((err) => {
+      console.warn('Checkout: Failed to retrieve user session.', err);
+    });
   }, []);
 
   const handleCheckout = async () => {
